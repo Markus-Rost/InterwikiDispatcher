@@ -1,6 +1,7 @@
 <?php
 namespace MediaWiki\Extension\InterwikiDispatcher;
 
+use Config;
 use Title;
 
 class InterwikiDispatcherHooks implements \MediaWiki\Hook\GetLocalURLHook {
