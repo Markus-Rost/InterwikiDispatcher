@@ -46,9 +46,9 @@ $wgIWDPrefixes[] = [
   'url' => 'https://$2.fandom.com/wiki/$1',
   'urlInt' => 'https://$2.fandom.com/$3/wiki/$1'
 ];
-# [[farm:gg:terraria]] => https://terraria.fandom.com/wiki/
-# [[farm:gg:terraria:NPCs]] => https://terraria.fandom.com/wiki/NPCs
-# [[farm:gg:de.terraria:NPCs]] => https://terraria.fandom.com/de/wiki/NPCs
+# [[farm:gg:terraria]] => https://terraria.wiki.gg/wiki/
+# [[farm:gg:terraria:NPCs]] => https://terraria.wiki.gg/wiki/NPCs
+# [[farm:gg:de.terraria:NPCs]] => https://terraria.wiki.gg/de/wiki/NPCs
 $wgIWDPrefixes[] = [
   'interwiki' => 'farm',
   'subprefix' => 'gg',
