@@ -40,10 +40,10 @@ class InterwikiDispatcherHooks implements \MediaWiki\Hook\GetLocalURLHook {
         $subprefix = $rule['subprefix'] ?? '';
         if ( $subprefix !== '' ) $subprefix .= '_*:_*';
         $m = [];
-        if ( !empty( $dbkey ) && preg_match( "/^$subprefix(?:([a-z-]{2,12})\.)?([a-z\d-]{1,50})(?:_*:_*(.*))?$/Si", $dbkey, $m ) ) {
+        if ( $dbkey !== '' && preg_match( "/^$subprefix(?:([a-z-]{2,12})\.)?([a-z\d-]{1,50})(?:_*:_*(.*))?$/Si", $dbkey, $m ) ) {
             if ( !isset( $m[3] ) ) $m[3] = '';
             [ , $language, $wiki, $article ] = $m;
-            if ( empty( $language ) ) {
+            if ( $language === '' ) {
                 # $articlePath = 'https://$2.wiki.gg/wiki/$1'
                 $articlePath = $rule['url'];
             }
