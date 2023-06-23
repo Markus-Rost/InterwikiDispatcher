@@ -1,0 +1,8 @@
+{
+    "@metadata": {
+        "authors": [
+            "MarkusRost"
+        ]
+    },
+    "interwikidispatcher-desc": "Creates full urls for interwiki links to external wikis."
+}

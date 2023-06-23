@@ -1,0 +1,44 @@
+{
+	"name": "InterwikiDispatcher",
+	"version": "0.1.0",
+
+	"author": [
+		"MarkusRost"
+	],
+	"url": "https://github.com/Markus-Rost/InterwikiDispatcher",
+	"descriptionmsg": "interwikidispatcher-desc",
+	"license-name": "GPL-2.0-or-later",
+	"type": "other",
+
+	"requires": {
+		"MediaWiki": ">= 1.37.0",
+		"platform": {
+			"php": ">= 7.4"
+		}
+	},
+
+	"MessagesDirs": {
+		"InterwikiDispatcher": [
+			"i18n"
+		]
+	},
+
+	"AutoloadNamespaces": {
+		"MediaWiki\\Extension\\InterwikiDispatcher\\": "includes/"
+	},
+	
+	"HookHandlers": {
+		"Main": {
+			"class": "MediaWiki\\Extension\\InterwikiDispatcher\\InterwikiDispatcherHooks"
+		}
+	},
+	"Hooks": {
+		"GetLocalURL": "Main"
+	},
+
+	"config_prefix": "wgIWD",
+	"config": {
+	},
+
+	"manifest_version": 2
+}
