@@ -36,7 +36,7 @@ class InterwikiDispatcherHooks implements \MediaWiki\Hook\GetLocalURLHook {
             # Yes! It can in interwiki transclusion. But... it probably shouldn't.
             $namespace .= ':';
         }
-        $dbkey = $namespace . $title->getDBKey();
+        $dbkey = $title->getDBKey();
         $subprefix = $rule['subprefix'] ?? '';
         if ( $subprefix !== '' ) $subprefix .= '_*:_*';
         $m = [];
@@ -56,7 +56,7 @@ class InterwikiDispatcherHooks implements \MediaWiki\Hook\GetLocalURLHook {
                 $articlePath = str_replace( "$3", strtolower( $language ), $articlePath );
             }
             $articlePath = str_replace( "$2", strtolower( $wiki ), $articlePath );
-            $url = str_replace( "$1", wfUrlencode( $article ?? '' ), $articlePath );
+            $url = str_replace( "$1", wfUrlencode( $namespace . ( $article ?? '' ) ), $articlePath );
             $url = wfAppendQuery( $url, $query );
             return false;
         }
