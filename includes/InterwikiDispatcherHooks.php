@@ -26,7 +26,7 @@ class InterwikiDispatcher implements \MediaWiki\Hook\GetLocalURLHook {
             return;
         }
         $m = [];
-        if ( preg_match( "/^((?:[a-z-]{2,12}\\.)?[a-z\\d-]{1,50})(?:_*:_*(.*))?$/Si", $dbkey, $m ) ) {
+        if ( preg_match( "/^((?:[a-z-]{2,12}\.)?[a-z\d-]{1,50})(?:_*:_*(.*))?$/Si", $dbkey, $m ) ) {
             $wiki = explode( '.', strtolower( $m[1] ) );
             if ( count( $wiki ) > 2 ) {
                 return false;
