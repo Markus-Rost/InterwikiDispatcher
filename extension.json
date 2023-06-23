@@ -1,9 +1,10 @@
 {
 	"name": "InterwikiDispatcher",
-	"version": "0.1.0",
+	"version": "1.0.0",
 
 	"author": [
-		"MarkusRost"
+		"MarkusRost",
+		"alex4401"
 	],
 	"url": "https://github.com/Markus-Rost/InterwikiDispatcher",
 	"descriptionmsg": "interwikidispatcher-desc",
@@ -38,6 +39,9 @@
 
 	"config_prefix": "wgIWD",
 	"config": {
+		"Prefixes": {
+			"value": []
+		}
 	},
 
 	"manifest_version": 2
