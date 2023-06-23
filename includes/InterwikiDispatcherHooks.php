@@ -3,7 +3,7 @@ namespace MediaWiki\Extension\InterwikiDispatcher;
 
 use Title;
 
-class InterwikiDispatcher implements \MediaWiki\Hook\GetLocalURLHook {
+class InterwikiDispatcherHooks implements \MediaWiki\Hook\GetLocalURLHook {
     /**
      * @param Title $title Title object of page
      * @param string &$url String value as output (out parameter, can modify)
