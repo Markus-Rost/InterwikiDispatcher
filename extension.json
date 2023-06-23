@@ -30,7 +30,10 @@
 	
 	"HookHandlers": {
 		"Main": {
-			"class": "MediaWiki\\Extension\\InterwikiDispatcher\\InterwikiDispatcherHooks"
+			"class": "MediaWiki\\Extension\\InterwikiDispatcher\\InterwikiDispatcherHooks",
+			"services": [
+				"MainConfig"
+			]
 		}
 	},
 	"Hooks": {
