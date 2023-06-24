@@ -27,6 +27,7 @@ class InterwikiDispatcherHooks implements \MediaWiki\Hook\GetLocalURLHook {
     }
 
     public function onGetLocalURLSingle( $title, &$url, $query, $rule ) {
+        global $wgConf;
         if ( $title->getInterwiki() !== $rule['interwiki'] ) {
             return true;
         }
@@ -37,26 +38,40 @@ class InterwikiDispatcherHooks implements \MediaWiki\Hook\GetLocalURLHook {
         if ( $dbkey !== '' && preg_match( "/^$subprefix(?:([a-z-]{2,12})\.)?([a-z\d-]{1,50})(?:_*:_*(.*))?$/Si", $dbkey, $m ) ) {
             if ( !isset( $m[3] ) ) $m[3] = '';
             [ , $language, $wiki, $article ] = $m;
+            $wiki = strtolower( $wiki );
             if ( $language === '' ) {
                 # $articlePath = 'https://$2.wiki.gg/wiki/$1'
                 $articlePath = $rule['url'];
+                $dbname = $rule['dbname'];
             }
             else {
+                $language = strtolower( $language );
                 # $articlePath = 'https://$2.wiki.gg/$3/wiki/$1'
                 $articlePath = $rule['urlInt'];
                 if ( !isset( $articlePath ) ) {
                     return true;
                 }
-                $articlePath = str_replace( "$3", strtolower( $language ), $articlePath );
+                $articlePath = str_replace( '$3', $language, $articlePath );
+                $dbname = $rule['dbnameInt'];
+                if ( isset( $dbname ) ) {
+                    $dbname = str_replace( '$3', $language, $dbname );
+                }
             }
-            $articlePath = str_replace( "$2", strtolower( $wiki ), $articlePath );
+            if ( isset( $dbname ) ) {
+                $dbname = str_replace( '$2', $wiki, $dbname );
+                if ( !in_array( $dbname, $wgConf->getLocalDatabases() ) ) {
+                    return true;
+                }
+            }
+            $articlePath = str_replace( '$2', $wiki, $articlePath );
             $namespace = $title->getNsText();
             if ( $namespace != '' ) {
                 # Can this actually happen? Interwikis shouldn't be parsed.
                 # Yes! It can in interwiki transclusion. But... it probably shouldn't.
                 $namespace .= ':';
             }
-            $url = str_replace( "$1", wfUrlencode( $namespace . ( $article ?? '' ) ), $articlePath );
+            $article = $namespace . ( $article ?? '' );
+            $url = str_replace( '$1', wfUrlencode( $article ), $articlePath );
             $url = wfAppendQuery( $url, $query );
             return false;
         }
