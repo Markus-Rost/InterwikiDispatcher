@@ -31,7 +31,7 @@ class InterwikiDispatcherHooks implements \MediaWiki\Hook\GetLocalURLHook {
         if ( $title->getInterwiki() !== $rule['interwiki'] ) {
             return true;
         }
-        if ( $rule['baseTransOnly'] === true && preg_match( "/(?:^|&)action=(?:render|raw)(?:&|$)/Si", $query ) ) {
+        if ( ( $rule['baseTransOnly'] ?? false ) === true && preg_match( "/(?:^|&)action=(?:render|raw)(?:&|$)/Si", $query ) ) {
             return true;
         }
         $dbkey = $title->getDBKey();
