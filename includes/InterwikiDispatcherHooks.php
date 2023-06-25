@@ -42,22 +42,22 @@ class InterwikiDispatcherHooks implements \MediaWiki\Hook\GetLocalURLHook {
             if ( $language === '' ) {
                 # $articlePath = 'https://$2.wiki.gg/wiki/$1'
                 $articlePath = $rule['url'];
-                $dbname = $rule['dbname'];
+                $dbname = $rule['dbname'] ?? null;
             }
             else {
                 $language = strtolower( $language );
                 # $articlePath = 'https://$2.wiki.gg/$3/wiki/$1'
-                $articlePath = $rule['urlInt'];
-                if ( !isset( $articlePath ) ) {
+                $articlePath = $rule['urlInt'] ?? null;
+                if ( $articlePath === null ) {
                     return true;
                 }
                 $articlePath = str_replace( '$3', $language, $articlePath );
-                $dbname = $rule['dbnameInt'];
-                if ( isset( $dbname ) ) {
+                $dbname = $rule['dbnameInt'] ?? null;
+                if ( $dbname !== null ) {
                     $dbname = str_replace( '$3', $language, $dbname );
                 }
             }
-            if ( isset( $dbname ) ) {
+            if ( $dbname !== null ) {
                 $dbname = str_replace( '$2', $wiki, $dbname );
                 if ( !in_array( $dbname, $wgConf->getLocalDatabases() ) ) {
                     return true;
