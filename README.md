@@ -19,8 +19,8 @@ $wgIWDPrefixes[] = [
   'subprefix' => 'c', # Optional: Subprefix to keep the interwiki working mostly as expected
   'url' => 'https://$2.fandom.com/wiki/$1', # URL format for the interwiki `w:c:$2:$1`
   'urlInt' => 'https://$2.fandom.com/$3/wiki/$1', # Optional: Additional URL format `w:c:$3.$2:$1`
-  'dbname' => '$2_en', # Optional: Checking `$wgConf->getLocalDatabases()` if the wiki exists
-  'dbnameInt' => '$2_$3', # Optional: Checking `$wgConf->getLocalDatabases()` if the wiki exists
+  'dbname' => '$2_en', # Optional: Checking `$wgLocalDatabases` if the wiki exists
+  'dbnameInt' => '$2_$3', # Optional: Checking `$wgLocalDatabases` if the wiki exists
 ];
 ```
 ```php

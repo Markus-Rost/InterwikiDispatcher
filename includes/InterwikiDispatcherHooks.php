@@ -27,7 +27,7 @@ class InterwikiDispatcherHooks implements \MediaWiki\Hook\GetLocalURLHook {
     }
 
     public function onGetLocalURLSingle( $title, &$url, $query, $rule ) {
-        global $wgConf;
+        global $wgLocalDatabases;
         if ( $title->getInterwiki() !== $rule['interwiki'] ) {
             return true;
         }
@@ -59,7 +59,7 @@ class InterwikiDispatcherHooks implements \MediaWiki\Hook\GetLocalURLHook {
             }
             if ( $dbname !== null ) {
                 $dbname = str_replace( '$2', $wiki, $dbname );
-                if ( !in_array( $dbname, $wgConf->getLocalDatabases() ) ) {
+                if ( !in_array( $dbname, $wgLocalDatabases ) ) {
                     return true;
                 }
             }
