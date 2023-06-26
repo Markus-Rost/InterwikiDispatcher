@@ -13,6 +13,9 @@
 
 	"requires": {
 		"MediaWiki": ">= 1.37.0",
+		"extensions": {
+			"Interwiki": "*"
+		},
 		"platform": {
 			"php": ">= 7.4"
 		}
