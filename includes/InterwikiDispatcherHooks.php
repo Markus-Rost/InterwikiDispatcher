@@ -12,6 +12,8 @@ class InterwikiDispatcherHooks implements \MediaWiki\Hook\GetLocalURLHook {
     }
 
     /**
+     * Generates external links for titles in configured interwikis.
+     *
      * @param Title $title Title object of page
      * @param string &$url String value as output (out parameter, can modify)
      * @param string $query Query options as string passed to Title::getLocalURL()
@@ -26,6 +28,15 @@ class InterwikiDispatcherHooks implements \MediaWiki\Hook\GetLocalURLHook {
         return true;
     }
 
+    /**
+     * Attempts to match a title against an external wikifarm interwiki rule, and generates a URL when successful.
+     *
+     * @param array $rule Farm interwiki settings.
+     * @param Title $title Title object of page
+     * @param string &$url String value as output (out parameter)
+     * @param string $query Query options as string passed
+     * @return bool True when $url not modified, false otherwise
+     */
     private function getLocalURLSingle( $rule, $title, &$url, $query ) {
         if ( $title->getInterwiki() !== $rule['interwiki'] ) {
             return true;
