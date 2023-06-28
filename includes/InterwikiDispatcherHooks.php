@@ -19,14 +19,14 @@ class InterwikiDispatcherHooks implements \MediaWiki\Hook\GetLocalURLHook {
      */
     public function onGetLocalURL( $title, &$url, $query ) {
         foreach ( $this->rules as $key => $rule ) {
-            if ( $this->onGetLocalURLSingle( $rule, $title, $url, $query ) === false ) {
+            if ( $this->getLocalURLSingle( $rule, $title, $url, $query ) === false ) {
                 return false;
             }
         }
         return true;
     }
 
-    public function onGetLocalURLSingle( $rule, $title, &$url, $query ) {
+    private function getLocalURLSingle( $rule, $title, &$url, $query ) {
         if ( $title->getInterwiki() !== $rule['interwiki'] ) {
             return true;
         }
