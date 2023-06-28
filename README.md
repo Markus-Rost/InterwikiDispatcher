@@ -21,6 +21,7 @@ $wgIWDPrefixes[] = [
   'urlInt' => 'https://$2.fandom.com/$3/wiki/$1', # Optional: Additional URL format `w:c:$3.$2:$1`
   'dbname' => '$2_en', # Optional: Checking `$wgLocalDatabases` if the wiki exists
   'dbnameInt' => '$2_$3', # Optional: Checking `$wgLocalDatabases` if the wiki exists
+  'wikiExistsCallback' => null, # Optional: Custom function to check if the wiki exists
   'baseTransOnly' => true, # Optional: Fall back to the base interwiki for scary transclusion
 ];
 ```
@@ -48,7 +49,7 @@ $wgIWDPrefixes[] = [
 $wgIWDPrefixes = [
   # [[farm:mh:meta]] => https://meta.miraheze.org/wiki/
   # [[farm:mh:meta:Miraheze]] => https://meta.miraheze.org/wiki/Miraheze
-  [
+  'miraheze' => [
     'interwiki' => 'farm',
     'subprefix' => 'mh',
     'url' => 'https://$2.miraheze.org/wiki/$1',
@@ -56,7 +57,7 @@ $wgIWDPrefixes = [
   # [[farm:fd:minecraft]] => https://minecraft.fandom.com/wiki/
   # [[farm:fd:minecraft:Cookie]] => https://minecraft.fandom.com/wiki/Cookie
   # [[farm:fd:de.minecraft:Keks]] => https://minecraft.fandom.com/de/wiki/Keks
-  [
+  'fandom' => [
     'interwiki' => 'farm',
     'subprefix' => 'fd',
     'url' => 'https://$2.fandom.com/wiki/$1',
@@ -65,7 +66,7 @@ $wgIWDPrefixes = [
   # [[farm:gg:terraria]] => https://terraria.wiki.gg/wiki/
   # [[farm:gg:terraria:NPCs]] => https://terraria.wiki.gg/wiki/NPCs
   # [[farm:gg:de.terraria:NPCs]] => https://terraria.wiki.gg/de/wiki/NPCs
-  [
+  'wikigg' => [
     'interwiki' => 'farm',
     'subprefix' => 'gg',
     'url' => 'https://$2.wiki.gg/wiki/$1',

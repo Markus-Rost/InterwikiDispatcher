@@ -19,15 +19,14 @@ class InterwikiDispatcherHooks implements \MediaWiki\Hook\GetLocalURLHook {
      */
     public function onGetLocalURL( $title, &$url, $query ) {
         foreach ( $this->rules as $key => $rule ) {
-            if ( $this->onGetLocalURLSingle( $title, $url, $query, $rule ) === false ) {
+            if ( $this->onGetLocalURLSingle( $rule, $title, $url, $query ) === false ) {
                 return false;
             }
         }
         return true;
     }
 
-    public function onGetLocalURLSingle( $title, &$url, $query, $rule ) {
-        global $wgLocalDatabases;
+    public function onGetLocalURLSingle( $rule, $title, &$url, $query ) {
         if ( $title->getInterwiki() !== $rule['interwiki'] ) {
             return true;
         }
@@ -44,29 +43,22 @@ class InterwikiDispatcherHooks implements \MediaWiki\Hook\GetLocalURLHook {
             }
             [ , $language, $wiki, $article ] = $m;
             $wiki = strtolower( $wiki );
+            $language = strtolower( $language );
+            $wikiExistsCallback = $rule['wikiExistsCallback'] ?? $this->doesWikiExist;
+            if ( $wikiExistsCallback( $rule, $wiki, $language ) !== true ) {
+                return true;
+            }
             if ( $language === '' ) {
                 # $articlePath = 'https://$2.wiki.gg/wiki/$1'
                 $articlePath = $rule['url'];
-                $dbname = $rule['dbname'] ?? null;
             }
             else {
-                $language = strtolower( $language );
                 # $articlePath = 'https://$2.wiki.gg/$3/wiki/$1'
                 $articlePath = $rule['urlInt'] ?? null;
                 if ( $articlePath === null ) {
                     return true;
                 }
                 $articlePath = str_replace( '$3', $language, $articlePath );
-                $dbname = $rule['dbnameInt'] ?? null;
-                if ( $dbname !== null ) {
-                    $dbname = str_replace( '$3', $language, $dbname );
-                }
-            }
-            if ( $dbname !== null ) {
-                $dbname = str_replace( '$2', $wiki, $dbname );
-                if ( !in_array( $dbname, $wgLocalDatabases ) ) {
-                    return true;
-                }
             }
             $articlePath = str_replace( '$2', $wiki, $articlePath );
             $namespace = $title->getNsText();
@@ -79,6 +71,28 @@ class InterwikiDispatcherHooks implements \MediaWiki\Hook\GetLocalURLHook {
             $url = str_replace( '$1', wfUrlencode( $article ), $articlePath );
             $url = wfAppendQuery( $url, $query );
             return false;
+        }
+        return true;
+    }
+
+    /**
+     * @param array $rule
+     * @param string &$wiki
+     * @param string &$language
+     * @return bool True to continue or false to abort
+     */
+    private function doesWikiExist( $rule, &$wiki, &$language ) {
+        global $wgLocalDatabases;
+        if ( $language === '' ) {
+            $dbname = $rule['dbname'] ?? null;
+        }
+        else {
+            $dbname = $rule['dbnameInt'] ?? null;
+        }
+        if ( $dbname !== null ) {
+            $dbname = str_replace( '$2', $wiki, $dbname );
+            $dbname = str_replace( '$3', $language, $dbname );
+            return in_array( $dbname, $wgLocalDatabases );
         }
         return true;
     }
