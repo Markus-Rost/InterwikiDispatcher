@@ -17,12 +17,13 @@ Hooking into existing interwiki prefixes to provide some limited API support. Su
 $wgIWDPrefixes[] = [
   'interwiki' => 'w', # Interwiki prefix that exists in the interwiki table
   'subprefix' => 'c', # Optional: Subprefix to keep the base interwiki working mostly as expected
-  'url' => 'https://$2.fandom.com/wiki/$1', # URL format for the interwiki `w:c:$2:$1`
-  'urlInt' => 'https://$2.fandom.com/$3/wiki/$1', # Optional: Additional URL format `w:c:$3.$2:$1`
-  'dbname' => '$2_en', # Optional: Checking `$wgLocalDatabases` if the wiki exists
-  'dbnameInt' => '$2_$3', # Optional: Checking `$wgLocalDatabases` if the wiki exists
-  'wikiExistsCallback' => null, # Optional: Custom function to check if the wiki exists
+  'url' => 'https://$2.fandom.com/wiki/$1', # URL format for the interwiki `w:c:$2:$1` ($1: page title, $2: domain)
+  'urlInt' => 'https://$2.fandom.com/$3/wiki/$1', # Optional: Additional URL format `w:c:$3.$2:$1` ($3: language).
   'baseTransOnly' => true, # Optional: Fall back to the base interwiki for scary transclusion
+  'dbname' => '$2_en', # Optional: Wiki ID format to check existence via `$wgLocalDatabases`, subdomain as $2, language unspecified
+  'dbnameInt' => '$2_$3', # Optional: As above, but language provided as $3
+  'wikiExistsCallback' => null, # Optional: Custom function to check if the wiki exists, replaces the DB check. Takes this array as
+                                # `$rule`, domain as `&$wiki`, language as `&$language` (or empty string).
 ];
 ```
 ```php
