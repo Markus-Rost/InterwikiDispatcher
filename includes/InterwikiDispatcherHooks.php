@@ -44,7 +44,7 @@ class InterwikiDispatcherHooks implements \MediaWiki\Hook\GetLocalURLHook {
             [ , $language, $wiki, $article ] = $m;
             $wiki = strtolower( $wiki );
             $language = strtolower( $language );
-            $wikiExistsCallback = $rule['wikiExistsCallback'] ?? $this->doesWikiExist;
+            $wikiExistsCallback = $rule['wikiExistsCallback'] ?? [ $this, 'doesWikiExist' ];
             if ( $wikiExistsCallback( $rule, $wiki, $language ) !== true ) {
                 return true;
             }
