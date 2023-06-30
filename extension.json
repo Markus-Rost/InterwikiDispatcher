@@ -12,7 +12,7 @@
 	"type": "other",
 
 	"requires": {
-		"MediaWiki": ">= 1.37.0",
+		"MediaWiki": ">= 1.35.0",
 		"platform": {
 			"php": ">= 7.4"
 		}
