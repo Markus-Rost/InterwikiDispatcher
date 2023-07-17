@@ -1,8 +1,13 @@
 {
     "@metadata": {
         "authors": [
-            "Rail"
+            "Rail",
+            "alex4401"
         ]
     },
-    "interwikidispatcher-desc": "Tworzy pełne adresy URL z linków interwiki do zewnętrznych witryn"
+    "interwikidispatcher-desc": "Tworzy pełne adresy URL z linków interwiki do zewnętrznych witryn",
+    "interwikidispatcher-specialpage-heading": "Wielopoziomowe przedrostki interwiki",
+    "interwikidispatcher-specialpage-description": "Poniższe przedrostki pozwalają na tworzenie linków do konkretnych wiki w zewnętrznych farmach.",
+    "interwikidispatcher-specialpage-inturl": "Międzynarodowy URL",
+    "interwikidispatcher-specialpage-fulltrans": "Pełna transkluzja"
 }

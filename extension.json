@@ -27,17 +27,37 @@
 	"AutoloadNamespaces": {
 		"MediaWiki\\Extension\\InterwikiDispatcher\\": "includes/"
 	},
-	
+
 	"HookHandlers": {
 		"Main": {
 			"class": "MediaWiki\\Extension\\InterwikiDispatcher\\InterwikiDispatcherHooks",
 			"services": [
 				"MainConfig"
 			]
+		},
+		"SpecialInterwiki": {
+			"class": "MediaWiki\\Extension\\InterwikiDispatcher\\ExtensionInterwikiHooks",
+			"services": [
+				"MainConfig",
+				"InterwikiLookup"
+			]
 		}
 	},
 	"Hooks": {
-		"GetLocalURL": "Main"
+		"GetLocalURL": "Main",
+		"SpecialPageAfterExecute": "SpecialInterwiki"
+	},
+
+	"ResourceModules": {
+		"ext.interwikidispatcher.specialinterwiki": {
+			"styles": [
+				"ext.interwikidispatcher.specialinterwiki.css"
+			]
+		}
+	},
+	"ResourceFileModulePaths": {
+		"localBasePath": "modules",
+		"remoteExtPath": "InterwikiDispatcher/modules"
 	},
 
 	"config_prefix": "wgIWD",
