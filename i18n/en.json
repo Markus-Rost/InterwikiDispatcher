@@ -1,13 +1,13 @@
 {
     "@metadata": {
         "authors": [
-            "MarkusRost"
+            "MarkusRost",
+            "alex4401"
         ]
     },
     "interwikidispatcher-desc": "Creates full urls for interwiki links to external wikis.",
     "interwikidispatcher-specialpage-heading": "Multi-level interwiki prefixes",
-    "interwikidispatcher-specialpage-description": "These interwikis link to chosen wikis in external wiki farms.",
+    "interwikidispatcher-specialpage-description": "These interwikis link to chosen wikis in wiki farms.",
     "interwikidispatcher-specialpage-inturl": "International URL",
-    "interwikidispatcher-specialpage-fulltrans": "Full transclude",
     "interwikidispatcher-specialpage-checksexists": "Existence check"
 }

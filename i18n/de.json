@@ -4,5 +4,9 @@
             "MarkusRost"
         ]
     },
-    "interwikidispatcher-desc": "Erstelle URLs für Interwiki-Links zu externen Wikis."
+    "interwikidispatcher-desc": "Erstelle URLs für Interwiki-Links zu externen Wikis.",
+    "interwikidispatcher-specialpage-heading": "Multi-level Interwiki-Präfixe",
+    "interwikidispatcher-specialpage-description": "Diese Interwiki-Präfixe verlinken zu ausgewählten Wikis in Wiki-Farmen.",
+    "interwikidispatcher-specialpage-inturl": "Internationale URL",
+    "interwikidispatcher-specialpage-checksexists": "Existenz überprüft"
 }
