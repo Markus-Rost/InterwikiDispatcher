@@ -8,5 +8,6 @@
     "interwikidispatcher-specialpage-heading": "Multi-level interwiki prefixes",
     "interwikidispatcher-specialpage-description": "These interwikis link to chosen wikis in external wiki farms.",
     "interwikidispatcher-specialpage-inturl": "International URL",
-    "interwikidispatcher-specialpage-fulltrans": "Full transclude"
+    "interwikidispatcher-specialpage-fulltrans": "Full transclude",
+    "interwikidispatcher-specialpage-checksexists": "Existence check"
 }

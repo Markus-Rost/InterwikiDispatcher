@@ -57,7 +57,8 @@ class ExtensionInterwikiHooks implements \MediaWiki\SpecialPage\Hook\SpecialPage
             Html::element( 'th', [], $special->msg( 'interwiki_prefix' )->text() ) .
             Html::element( 'th', [], $special->msg( 'interwiki_url' )->text() ) .
             Html::element( 'th', [], $special->msg( 'interwikidispatcher-specialpage-inturl' )->text() ) .
-            Html::element( 'th', [], $special->msg( 'interwikidispatcher-specialpage-fulltrans' )->text() );
+            Html::element( 'th', [], $special->msg( 'interwikidispatcher-specialpage-fulltrans' )->text() ) .
+            Html::element( 'th', [], $special->msg( 'interwikidispatcher-specialpage-checksexists' )->text() );
         $out .= Html::closeElement( 'tr' ) .
             Html::closeElement( 'thead' ) . "\n" .
             Html::openElement( 'tbody' );
@@ -99,6 +100,12 @@ class ExtensionInterwikiHooks implements \MediaWiki\SpecialPage\Hook\SpecialPage
             // The messages interwiki_0 and interwiki_1 are used here.
             $contents = $special->msg( 'interwiki_' . ( $canTransclude ? '1' : '0' ) )->text();
             $out .= Html::element( 'td', $attribs, $contents );
+
+            // The messages interwiki_0 and interwiki_1 are used here
+            $hasExistenceCheck = ( $rule['wikiExistsCallback'] ?? $rule['dbname'] ?? null ) !== null;
+            $contents = $special->msg( 'interwiki_' . ( $hasExistenceCheck ? '1' : '0' ) )->text();
+            $out .= Html::element( 'td', [ 'class' => 'ext-interwikidispatcher-checksexists' ], $contents );
+
             $out .= Html::closeElement( 'tr' ) . "\n";
         }
         $out .= Html::closeElement( 'tbody' ) .
