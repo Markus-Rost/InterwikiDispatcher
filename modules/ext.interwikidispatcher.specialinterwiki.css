@@ -1,3 +1,12 @@
-table.mw-interwikitable.body .ext-interwikidispatcher-missing {
-    text-decoration: line-through;
+table.mw-interwikitable.body tr.ext-interwikidispatcher-missing {
+    position: relative;
+}
+  
+tr.ext-interwikidispatcher-missing td::before {
+    content: '';
+    position: absolute;
+    left: 0.2em;
+    right: 0.2em;
+    top: 50%;
+    border-bottom: 1px solid currentColor;
 }
