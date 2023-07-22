@@ -2,6 +2,10 @@ table.mw-interwikitable.body tr.ext-interwikidispatcher-missing {
     background-color: rgba(0,0,0,.2);
 }
 
+table.mw-interwikitable.body tr.ext-interwikidispatcher-missing td.mw-interwikitable-prefix {
+    text-decoration: line-through;
+}
+
 table.mw-interwikitable.body td.ext-interwikidispatcher-checksexists {
     text-align: center;
 }

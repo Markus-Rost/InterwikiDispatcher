@@ -5,11 +5,38 @@ see http://www.gnu.org/copyleft/gpl.html for further details, including the
 full text and terms of the license.
 
 ## Overview
-Adding some simple multi-level interwikis for easier linking to wiki farms.
+The **InterwikiDispatcher** extension adds some simple multi-level interwikis for easier linking to wiki farms.
 
 Hooking into existing interwiki prefixes to provide some limited API support. Subdomain part of the interwiki is validated as `a-z\d-` to avoid open redirect vulnerabilities. Scary transclusion will work when enabled for the interwiki prefix.
 
-## Example configs
+## Installation
+* Download, extract, and place the files in a directory called `InterwikiDispatcher` in your `extensions/` folder.
+* Add the following code at the bottom of your [LocalSettings.php](https://www.mediawiki.org/wiki/Manual:LocalSettings.php) file: 
+```php
+wfLoadExtension( 'InterwikiDispatcher' );
+```
+* Configure as required.
+* Done – Navigate to Special:Version on your wiki to verify that the extension is successfully installed.
+
+## Configuration
+`$wgIWDPrefixes` is the sole variable controlling this extension's behaviour. The format is an array (keys do not matter) where values are associative arrays of parameters. These parameters are:
+* `'interwiki'` **(required)**: the interwiki prefix to apply this rule to.
+  * This prefix must be a valid and defined interwiki prefix.
+* `'subprefix'`: optional sub-prefix, which will be expected right after the interwiki prefix. For example a prefix of `'p'` and sub-prefix of `'s'` results in links of format `[[p:s:wiki:article]]` and `[[p:s:language.wiki:article]]`.
+* `'url'` **(required)**: external URL format. Placeholder `$1` stands for page title, `$2` for wiki domain.
+  * *Example:* `'https://$2.fandom.com/wiki/$1'`
+* `'urlInt'`: optional international external URL format. Placeholder `$3` stands for the language.
+  * *Example:* `'https://$2.fandom.com/$3/wiki/$1'`
+* `'baseTransOnly'`: if `true`, falls back to the base, classic interwiki during scary transclusion.
+  * *Default:* `false`
+* `'dbname'`: optional wiki ID format, used to check whether a wiki exists locally via [$wgLocalDatabases](https://www.mediawiki.org/wiki/Manual:$wgLocalDatabases). Placeholder `$2` is the wiki domain.
+  * *Example:* `'$2_en'`
+* `'dbnameInt'`: optional international wiki ID format, used to check whether a wiki exists locally via [$wgLocalDatabases](https://www.mediawiki.org/wiki/Manual:$wgLocalDatabases). Placeholder `$2` is the wiki domain, `$3` is the language.
+  * *Example:* `'$2_$3'`
+* `'wikiExistsCallback'`: optional custom function to check if a wiki exists. This completely replaces the DB check of `dbname`, `dbnameInt`.
+  * `function ( $rule, &$wiki, &$language ): bool`: Takes this array as `$rule`, domain as `&$wiki`, language as `&$language` (or empty string). Both `$wiki` and `$language` are out parameters: the callback may override them as needed.
+
+### Examples
 ```php
 # [[w:c:minecraft]] => https://minecraft.fandom.com/wiki/
 # [[w:c:minecraft:Cookie]] => https://minecraft.fandom.com/wiki/Cookie
@@ -22,8 +49,8 @@ $wgIWDPrefixes[] = [
   'baseTransOnly' => true, # Optional: Fall back to the base interwiki for scary transclusion
   'dbname' => '$2_en', # Optional: Wiki ID format to check existence via `$wgLocalDatabases`, subdomain as $2, language unspecified
   'dbnameInt' => '$2_$3', # Optional: As above, but language provided as $3
-  'wikiExistsCallback' => null, # Optional: Custom function to check if the wiki exists, replaces the DB check. Takes this array as
-                                # `$rule`, domain as `&$wiki`, language as `&$language` (or empty string).
+  'wikiExistsCallback' => null, # Optional: Custom function to check if the wiki exists, replaces the DB check.
+                                # Takes this array as `$rule`, domain as `&$wiki`, language as `&$language` (or empty string).
 ];
 ```
 ```php
@@ -75,3 +102,6 @@ $wgIWDPrefixes = [
   ],
 ];
 ```
+
+## Extension:Interwiki integration
+When [Extension:Interwiki](https://www.mediawiki.org/wiki/Extension:Interwiki) is enabled, an additional table for "Multi-level interwiki prefixes" will be added to Special:Interwiki listing the interwikis managed by this extension.
