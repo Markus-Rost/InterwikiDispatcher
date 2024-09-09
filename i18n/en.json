@@ -7,7 +7,7 @@
     },
     "interwikidispatcher-desc": "Creates full urls for interwiki links to external wikis.",
     "interwikidispatcher-specialpage-heading": "Multi-level interwiki prefixes",
-    "interwikidispatcher-specialpage-description": "These interwikis link to chosen wikis in wiki farms.",
+    "interwikidispatcher-specialpage-description": "These interwikis link to chosen wikis in wiki farms. They cannot be configured from this page, but each item here must have a corresponding defined interwiki which can be configured above.",
     "interwikidispatcher-specialpage-inturl": "International URL",
     "interwikidispatcher-specialpage-checksexists": "Existence check"
 }
