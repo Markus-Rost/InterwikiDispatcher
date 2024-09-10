@@ -26,8 +26,9 @@ class ExtensionInterwikiHooks implements \MediaWiki\SpecialPage\Hook\SpecialPage
      * @return bool|void True or no return value to continue or false to abort
      */
     public function onSpecialPageAfterExecute( $special, $subPage ) {
+        $action = $subPage ?: $special->getRequest()->getVal( 'action', $subPage );
         if ( !$special instanceof \MediaWiki\Extension\Interwiki\SpecialInterwiki
-            || in_array( $subPage, [ 'edit', 'add', 'delete' ] )
+            || in_array( $action, [ 'edit', 'add', 'delete' ] )
         ) {
             return;
         }
