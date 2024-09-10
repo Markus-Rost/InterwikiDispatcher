@@ -46,7 +46,7 @@ class InterwikiDispatcherHooks implements \MediaWiki\Hook\GetLocalURLHook {
         // If only classic interwikis are allowed during transclusion, check if the query string contains render or raw
         // actions (used in interwiki transclusion) and stop parsing.
         if ( ( $rule['baseTransOnly'] ?? false ) === true &&
-            preg_match( "/(?:^|&)action=(?:render|raw)(?:&|$)/Si", $query )
+            preg_match( "/(?:^|&)action=(?:render|raw)(?:&|$)/Si", $query ?? '' )
         ) {
             return true;
         }
