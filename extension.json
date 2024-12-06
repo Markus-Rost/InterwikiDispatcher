@@ -1,6 +1,6 @@
 {
 	"name": "InterwikiDispatcher",
-	"version": "1.4.3",
+	"version": "1.4.4",
 
 	"author": [
 		"MarkusRost",
@@ -12,7 +12,7 @@
 	"type": "other",
 
 	"requires": {
-		"MediaWiki": ">= 1.35.0",
+		"MediaWiki": ">= 1.44.0",
 		"platform": {
 			"php": ">= 7.4"
 		}
