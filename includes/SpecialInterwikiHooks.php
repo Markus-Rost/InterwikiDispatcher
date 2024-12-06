@@ -6,7 +6,7 @@ use Html;
 use MediaWiki\Interwiki\InterwikiLookup;
 use SpecialPage;
 
-class ExtensionInterwikiHooks implements \MediaWiki\SpecialPage\Hook\SpecialPageAfterExecuteHook {
+class SpecialInterwikiHooks implements \MediaWiki\SpecialPage\Hook\SpecialPageAfterExecuteHook {
     private array $rules;
     private InterwikiLookup $interwikiLookup;
 
@@ -27,8 +27,8 @@ class ExtensionInterwikiHooks implements \MediaWiki\SpecialPage\Hook\SpecialPage
      */
     public function onSpecialPageAfterExecute( $special, $subPage ) {
         $action = $subPage ?: $special->getRequest()->getVal( 'action', $subPage );
-        if ( !$special instanceof \MediaWiki\Extension\Interwiki\SpecialInterwiki
-            || in_array( $action, [ 'edit', 'add', 'delete' ] )
+        if ( !$special instanceof \MediaWiki\Specials\SpecialInterwiki
+            || ( in_array( $action, [ 'edit', 'add', 'delete' ] ) && $special->canModify() )
         ) {
             return;
         }
@@ -51,7 +51,7 @@ class ExtensionInterwikiHooks implements \MediaWiki\SpecialPage\Hook\SpecialPage
         // Output the header
         $out = Html::openElement(
             'table',
-            [ 'class' => 'mw-interwikitable wikitable sortable body' ]
+            [ 'class' => 'mw-interwikitable wikitable sortable' ]
         ) . "\n";
         $out .= Html::openElement( 'thead' ) .
             Html::openElement( 'tr', [ 'class' => 'interwikitable-header' ] ) .

@@ -36,7 +36,7 @@
 			]
 		},
 		"SpecialInterwiki": {
-			"class": "MediaWiki\\Extension\\InterwikiDispatcher\\ExtensionInterwikiHooks",
+			"class": "MediaWiki\\Extension\\InterwikiDispatcher\\SpecialInterwikiHooks",
 			"services": [
 				"MainConfig",
 				"InterwikiLookup"

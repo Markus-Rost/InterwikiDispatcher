@@ -103,5 +103,5 @@ $wgIWDPrefixes = [
 ];
 ```
 
-## Extension:Interwiki integration
-When [Extension:Interwiki](https://www.mediawiki.org/wiki/Extension:Interwiki) is enabled, an additional table for "Multi-level interwiki prefixes" will be added to Special:Interwiki listing the interwikis managed by this extension.
+## Special:Interwiki integration
+An additional table for "Multi-level interwiki prefixes" will be added to Special:Interwiki listing the interwikis managed by this extension.
