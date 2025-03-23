@@ -4,9 +4,12 @@ namespace MediaWiki\Extension\InterwikiDispatcher;
 use Config;
 use Html;
 use MediaWiki\Interwiki\InterwikiLookup;
+use MediaWiki\MainConfigNames;
+use MediaWiki\SpecialPage\Hook\SpecialPageAfterExecuteHook;
+use MediaWiki\Specials\SpecialInterwiki;
 use SpecialPage;
 
-class SpecialInterwikiHooks implements \MediaWiki\SpecialPage\Hook\SpecialPageAfterExecuteHook {
+class SpecialInterwikiHooks implements SpecialPageAfterExecuteHook {
     private array $rules;
     private InterwikiLookup $interwikiLookup;
 
@@ -27,8 +30,8 @@ class SpecialInterwikiHooks implements \MediaWiki\SpecialPage\Hook\SpecialPageAf
      */
     public function onSpecialPageAfterExecute( $special, $subPage ) {
         $action = $subPage ?: $special->getRequest()->getVal( 'action', $subPage );
-        if ( !$special instanceof \MediaWiki\Specials\SpecialInterwiki
-            || ( in_array( $action, [ 'edit', 'add', 'delete' ] ) && $special->canModify() )
+        if ( !$special instanceof SpecialInterwiki
+            || ( in_array( $action, [ 'edit', 'add', 'delete' ] ) && !$special->getConfig()->get( MainConfigNames::InterwikiCache ) )
         ) {
             return;
         }
