@@ -1,10 +1,11 @@
 <?php
 namespace MediaWiki\Extension\InterwikiDispatcher;
 
-use Config;
-use Title;
+use MediaWiki\Config\Config;
+use MediaWiki\Hook\GetLocalURLHook;
+use MediaWiki\Title\Title;
 
-class InterwikiDispatcherHooks implements \MediaWiki\Hook\GetLocalURLHook {
+class InterwikiDispatcherHooks implements GetLocalURLHook {
     private array $rules;
 
     public function __construct( Config $config ) {

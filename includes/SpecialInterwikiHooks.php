@@ -1,13 +1,13 @@
 <?php
 namespace MediaWiki\Extension\InterwikiDispatcher;
 
-use Config;
-use Html;
+use MediaWiki\Config\Config;
+use MediaWiki\Html\Html;
 use MediaWiki\Interwiki\InterwikiLookup;
 use MediaWiki\MainConfigNames;
 use MediaWiki\SpecialPage\Hook\SpecialPageAfterExecuteHook;
+use MediaWiki\SpecialPage\SpecialPage;
 use MediaWiki\Specials\SpecialInterwiki;
-use SpecialPage;
 
 class SpecialInterwikiHooks implements SpecialPageAfterExecuteHook {
     private array $rules;
